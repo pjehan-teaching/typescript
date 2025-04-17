@@ -1,0 +1,149 @@
+<section id="javascript-limitations" class="line-numbers">
+
+    <section>
+        <h2>Limitations de JavaScript</h2>
+    </section>
+
+    <section>
+        <h3>Typage en JavaScript</h3>
+        <div class="container">
+            <div class="col">
+                <p>
+                    JavaScript est un langage faiblement typé, ce qui signifie que les types de données sont déterminés
+                    <mark>dynamiquement au moment de l'exécution</mark>.
+                </p>
+                <p>
+                    Cela peut entraîner des erreurs difficiles à détecter, car le langage ne vérifie pas les types de
+                    données au moment de la compilation.
+                </p>
+            </div>
+            <div class="col">
+                <img src="assets/images/javascript.svg" alt="JavaScript">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>Typage en JavaScript</h3>
+        <p>
+            Dans l'exemple ci-dessous, nous avons une fonction qui additionne deux nombres.
+            Cependant, si nous passons une chaîne de caractères au lieu d'un nombre, la fonction retournera la
+            concaténation des deux chaînes au lieu de l'addition.
+        </p>
+        <pre><code class="language-js">function add(a, b) {
+  return a + b;
+}
+
+const nb1 = prompt('Enter first number');
+const nb2 = prompt('Enter second number');
+const result = add(nb1, nb2);
+console.log(result);</code></pre>
+        <p>
+            Dans cet exemple, si l'utilisateur entre "5" et "10", le résultat sera "510" au lieu de 15.
+            Cela peut entraîner des erreurs difficiles à détecter et à corriger dans le code.
+        </p>
+    </section>
+
+    <section>
+        <h3>Typage en JavaScript</h3>
+        <p>
+            De la même manière, si nous essayons d'accéder à <mark>une propriété d'un objet qui n'existe pas</mark>,
+            JavaScript ne lèvera pas d'erreur immédiatement. Au lieu de cela, il retournera <code>undefined</code>, ce
+            qui peut entraîner des comportements inattendus dans le code.
+        </p>
+        <p>
+            Dans l'exemple ci-dessous, nous essayons d'accéder aux propriétés <code class="language-js">firstName</code>
+            et <code class="language-js">lastName</code> d'un objet <code class="language-js">person</code>.
+        </p>
+        <pre><code class="language-js">fetch('https://swapi.dev/api/people/1/')
+  .then((response) => response.json())
+  .then(person => {
+    console.log(`Hello ${person.firstName} ${person.lastName}`);
+});</code></pre>
+        <p>
+            Cependant, si la réponse de l'API ne contient pas ces propriétés, JavaScript affichera alors dans la
+            console <code class="language-js">Hello undefined undefined</code> au lieu de lever une erreur.
+        </p>
+    </section>
+
+    <section>
+        <h3>POO en JavaScript</h3>
+        <p>
+            JavaScript est un langage orienté objet, mais il n'a pas de classes au sens traditionnel du terme.
+            Au lieu de cela, il utilise des <mark>prototypes</mark> pour créer des objets et gérer l'héritage.
+        </p>
+        <p>
+            Cependant, depuis ES6, JavaScript a introduit la <mark>syntaxe de classe</mark>, qui permet de créer
+            des classes et des objets de manière plus familière pour les développeurs venant d'autres langages orientés
+            objet.
+        </p>
+        <p>
+            En revanche, la <mark>syntaxe</mark> orientée objet de JavaScript est <mark>différente</mark>
+            de celle des langages comme Java ou C# et de nombreux <mark>concepts</mark> liés à la POO sont
+            <mark>absents ou différents</mark>.
+        </p>
+    </section>
+
+    <section>
+        <h3>POO en JavaScript</h3>
+        <p>
+            JavaScript n'a pas de modificateurs d'accès comme <code class="language-js">private</code> ou
+            <code class="language-js">protected</code>. Il est cependant possible de declarer des propriétés privées
+            en les préfixant du caractère <code class="language-js">#</code>, mais cela n'est pas une pratique courante.
+        </p>
+        <pre><code class="language-js">class Person {
+
+    #firstName;
+    #lastName;
+
+    constructor(firstName, lastName) {
+        this.#firstName = firstName;
+        this.#lastName = lastName;
+    }
+
+    getFullName() {
+        return `${this.#firstName} ${this.#lastName}`;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+        <h3>POO en JavaScript</h3>
+        <p>
+            Concernant la visibilité <code class="language-js">protected</code>, il est possible de la simuler en
+            utilisant des conventions de nommage, mais cela n'est pas une pratique courante.
+        </p>
+        <pre><code class="language-js">class Person {
+
+    _firstName;
+    _lastName;
+
+    constructor(firstName, lastName) {
+        this._firstName = firstName;
+        this._lastName = lastName;
+    }
+
+    getFullName() {
+        return `${this._firstName} ${this._lastName}`;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+        <h3>POO en JavaScript</h3>
+        <p>
+            On peut noter également d'autres différences importantes telles que :
+        </p>
+        <ul>
+            <li>Pas de surcharge (overloading) de méthode (ex : créer plusieurs constructeurs)</li>
+            <li>Pas de classes abstraites</li>
+            <li>Pas d'interface</li>
+            <li>Pas de classes generics</li>
+        </ul>
+        <p>
+            En résumé, JavaScript est un langage orienté objet, mais il n'a pas de classes au sens traditionnel du
+            terme. Il utilise des prototypes pour créer des objets et gérer l'héritage.
+        </p>
+    </section>
+
+</section>

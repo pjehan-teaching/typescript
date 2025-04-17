@@ -1,0 +1,409 @@
+<section id="typage" class="line-numbers">
+
+    <section>
+        <h2>Typage</h2>
+    </section>
+
+    <section>
+        <h3>Type inference</h3>
+        <p>
+            Par défaut, TypeScript infère le type d'une variable en fonction de sa valeur initiale.
+        </p>
+        <p>
+            Ainsi, l'exemple ci-dessous déclare une variable <code class="language-ts">x</code> de type
+            <code class="language-ts">number</code> car elle est initialisée avec un nombre :
+        </p>
+        <pre><code class="language-ts">let x = 5; // TypeScript infère que x est de type number</code></pre>
+        <p>
+            Cela signifie qu'il ne sera pas possible d'assigner une chaîne de caractères à cette variable :
+        </p>
+        <pre><code class="language-ts">x = 'Hello'; // Erreur : Type 'string' is not assignable to type 'number'</code></pre>
+    </section>
+
+    <section>
+        <h3>Type explicite</h3>
+        <p>
+            Il est également possible de déclarer explicitement le type d'une variable en utilisant la syntaxe
+            suivante :
+        </p>
+        <pre><code class="language-ts">let y: string = 'Hello'; // y est de type string</code></pre>
+        <p>
+            Cela permet de s'assurer que la variable ne peut contenir que des valeurs de ce type.
+        </p>
+    </section>
+
+    <section>
+        <h3>Désactiver l'inférence de type</h3>
+        <div class="container">
+            <div class="col">
+                <p>
+                    Il est possible de <mark>désactiver l'inférence</mark> de type en utilisant le mot-clé
+                    <code class="language-ts">any</code>.
+                    Cela permet de déclarer une variable sans spécifier son type :
+                </p>
+                <pre><code class="language-ts">let z: any = 5; // z peut être de n'importe quel type</code></pre>
+                <p>
+                    Cependant, cela annule les avantages de TypeScript en matière de typage statique et de sécurité de type.
+                    Il est donc recommandé de l'utiliser avec parcimonie.
+                </p>
+            </div>
+            <div class="col">
+                <img src="assets/images/meme-any.jpg" alt="Any Meme">
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h3>Fonctions</h3>
+        <p>
+            TypeScript permet de déclarer des types pour les arguments et le type de retour d'une fonction.
+            Par exemple, la fonction ci-dessous prend deux arguments de type <code class="language-ts">number</code>
+            et retourne un <code class="language-ts">number</code> :
+        </p>
+        <pre><code class="language-ts">function add(a: number, b: number): number {
+    return a + b;
+}</code></pre>
+        <p>
+            Cela signifie que si vous essayez de passer une chaîne de caractères à cette fonction, TypeScript lèvera
+            une erreur :
+        </p>
+        <pre><code class="language-ts">add(5, 'Hello'); // Erreur : Argument of type 'string' is not assignable to parameter of type 'number'</code></pre>
+    </section>
+
+    <section>
+        <h3>Overloading (surcharge)</h3>
+        <p>
+            TypeScript permet de définir plusieurs signatures pour une même fonction, ce qui est appelé
+            <mark>surcharge</mark>.
+            Par exemple, la fonction ci-dessous a deux signatures :
+        </p>
+        <pre><code class="language-ts">function add(a: number, b: number): number; // Signature 1
+function add(a: string, b: string): string; // Signature 2
+function add(a: number | string, b: number | string): number | string { // Implémentation gérant les deux signatures
+    return a + b;
+}</code></pre>
+        <p>
+            Cela signifie que vous pouvez appeler cette fonction avec deux nombres ou deux chaînes de caractères :
+        </p>
+        <pre><code class="language-ts">add(5, 10); // Retourne 15
+add('Hello', 'World'); // Retourne 'HelloWorld'</code></pre>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <ol>
+                <li>
+                    Créez une fonction <code class="language-ts">multiply</code> qui prend deux arguments de type
+                    <code class="language-ts">number</code> et retourne leur produit.
+                </li>
+                <li>
+                    Essayez d'appeler cette fonction avec un nombre et une chaîne de caractères pour voir l'erreur
+                    TypeScript.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h3>Paramètres optionnels</h3>
+        <p>
+            TypeScript permet de déclarer des paramètres optionnels en utilisant le symbole <code class="language-ts">?</code>.
+            Par exemple, la fonction ci-dessous a un paramètre optionnel <code class="language-ts">c</code> :
+        </p>
+        <pre><code class="language-ts">function add(a: number, b: number, c?: number): number {
+    if (c) {
+        return a + b + c;
+    }
+    return a + b;
+}</code></pre>
+        <p>
+            Cela signifie que vous pouvez appeler cette fonction avec deux ou trois arguments :
+        </p>
+        <pre><code class="language-ts">add(5, 10); // Appel avec deux arguments
+add(5, 10, 15); // Appel avec trois arguments</code></pre>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/functions.html#optional-parameters" class="info" target="_blank">
+                Paramètres optionnels Documentation
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Tableaux</h3>
+        <p>
+            TypeScript permet de déclarer des tableaux typés en utilisant la syntaxe suivante :
+        </p>
+        <pre><code class="language-ts">let numbers: number[] = [1, 2, 3]; // Tableau de nombres</code></pre>
+        <p>
+            Cela signifie que le tableau ne peut contenir que des valeurs de type <code class="language-ts">number</code>.
+            Si vous essayez d'ajouter une chaîne de caractères, TypeScript lèvera une erreur :
+        </p>
+        <pre><code class="language-ts">numbers.push('Hello'); // Erreur : Argument of type 'string' is not assignable to parameter of type 'number'</code></pre>
+        <p>
+            En fait, TypeScript utilise la syntaxe <code class="language-ts">Array&lt;type&gt;</code> basée sur les
+            <mark>Generics</mark> pour déclarer des tableaux typés et la syntaxe <code class="language-ts">type[]</code>
+            pour déclarer des tableaux n'est qu'un <mark>alias</mark>.
+        </p>
+    </section>
+
+    <section>
+        <h3>Tuples</h3>
+        <p>
+            TypeScript permet également de déclarer des tuples, qui sont des tableaux avec des types fixes pour chaque
+            élément.
+            Par exemple, vous pouvez déclarer un tuple qui contient un nombre et une chaîne de caractères :
+        </p>
+        <pre><code class="language-ts">let tuple: [number, string] = [1, 'Hello']; // Tuple avec un nombre et une chaîne</code></pre>
+        <p>
+            Les tuples sont souvent utilisés conjointement avec le destructuring pour extraire les valeurs :
+        </p>
+        <pre><code class="language-ts">function getDistance(from: [number, number], to: [number, number]): number {
+    const [x1, y1] = from;
+    const [x2, y2] = to;
+    return Math.sqrt((x2 - x1) ** 2 + (y2 - y1) ** 2);
+}</code></pre>
+    </section>
+
+    <section>
+        <h3>Objet</h3>
+        <p>
+            TypeScript permet de déclarer des types pour les objets en utilisant la syntaxe suivante :
+        </p>
+        <pre><code class="language-ts">let person: { name: string; age: number } = {
+    name: 'John',
+    age: 30
+}; // Objet avec des propriétés name et age</code></pre>
+        <p>
+            Cela signifie que l'objet doit avoir les propriétés spécifiées avec les types correspondants.
+            Si vous essayez d'ajouter une propriété qui n'est pas définie dans le type, TypeScript lèvera une erreur :
+        </p>
+        <pre><code class="language-ts">person.address = '123 Main St'; // Erreur : Property 'address' does not exist on type '{ name: string; age: number; }'</code></pre>
+        <p>
+            Vous pouvez également utiliser des interfaces pour définir des types d'objets plus complexes et réutilisables.
+        </p>
+        <p>
+            Nous aborderons les interfaces dans une prochaine section.
+        </p>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <pre><code class="language-ts">const categories = [
+    { id: 1, name: 'Productivity' },
+    { id: 2, name: 'Development' },
+    { id: 3, name: 'Design' },
+]</code></pre>
+        <div class="instructions">
+            <ol>
+                <li>
+                    À partir de liste de catégories ci-dessus, créez une fonction
+                    <code class="language-ts">displayCategories</code> qui prend un tableau de catégories.
+                </li>
+                <li>
+                    Dans cette fonction, utilisez la méthode <code class="language-ts">document.createElement</code> pour
+                    créer un élément <code class="language-ts">nav</code>.
+                </li>
+                <li>
+                    Ensuite, utilisez la méthode <code class="language-ts">document.createElement</code> pour créer un
+                    élément <code class="language-ts">button</code> pour chaque catégorie et ajoutez les boutons à
+                    l'élément <code class="language-ts">nav</code>.
+                </li>
+                <li>
+                    Enfin, ajoutez l'élément <code class="language-ts">nav</code> au document HTML.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h3>Union types</h3>
+        <p>
+            TypeScript permet de déclarer des types union, ce qui signifie qu'une variable peut être de plusieurs types.
+            Par exemple, vous pouvez déclarer une variable qui peut être soit un nombre, soit une chaîne de caractères :
+        </p>
+        <pre><code class="language-ts">let value: number | string; // value peut être un nombre ou une chaîne</code></pre>
+        <p>
+            Cela permet de créer des fonctions plus flexibles qui peuvent accepter différents types d'arguments.
+            Par exemple, la fonction ci-dessous accepte soit un nombre, soit une chaîne de caractères :
+        </p>
+        <pre><code class="language-ts">function print(value: number | string) {
+    console.log(value);
+}</code></pre>
+        <p>
+            Vous pouvez ensuite appeler cette fonction avec un nombre ou une chaîne de caractères :
+        </p>
+        <pre><code class="language-ts">print(5); // Affiche 5</code></pre>
+    </section>
+
+    <section>
+        <h3>Union types</h3>
+        <p>
+            Il est également possible d'utiliser les types d'union pour définir les valeurs possibles d'une variable
+            de type string.
+        </p>
+        <p>
+            Par exemple, vous pouvez déclarer une variable qui peut être soit "red", soit "green", soit "blue" :
+        </p>
+        <pre><code class="language-ts">let color: 'red' | 'green' | 'blue'; // color peut être 'red', 'green' ou 'blue'</code></pre>
+    </section>
+
+    <section>
+        <h3>Narrowing</h3>
+        <p>
+            TypeScript utilise un mécanisme appelé <mark>narrowing</mark> pour déterminer le type d'une variable à
+            l'exécution.
+            Cela permet de restreindre le type d'une variable en fonction de certaines conditions.
+            Par exemple, si vous avez une variable qui peut être soit un nombre, soit une chaîne de caractères,
+            vous pouvez utiliser une instruction <code class="language-ts">if</code> pour vérifier son type :
+        </p>
+        <pre><code class="language-ts">function print(value: number | string) {
+    if (typeof value === 'number') {
+        console.log(value * 2); // value est un nombre
+    } else {
+        console.log(value.toUpperCase()); // value est une chaîne
+    }
+}</code></pre>
+        <p>
+            Dans cet exemple, TypeScript sait que <code class="language-ts">value</code> est un nombre dans le bloc
+            <code class="language-ts">if</code> et une chaîne de caractères dans le bloc <code class="language-ts">else</code>.
+        </p>
+        <footer>
+            <a href="https://www.typescriptlang.org/static/TypeScript%20Control%20Flow%20Analysis-8a549253ad8470850b77c4c5c351d457.png" class="info" target="_blank">
+                Narrowing Cheat Sheet
+            </a>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html" class="info" target="_blank">
+                Narrowing Documentation
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>any, unknown et never</h3>
+        <p>
+            TypeScript propose plusieurs types spéciaux pour gérer des cas particuliers :
+        </p>
+        <ul>
+            <li>
+                <code class="language-ts">any</code> : permet de désactiver le typage statique pour une variable.
+                Cela annule les avantages de TypeScript en matière de sécurité de type.
+            </li>
+            <li>
+                <code class="language-ts">unknown</code> : similaire à <code class="language-ts">any</code>, mais
+                nécessite une vérification de type (narrowing) avant d'utiliser la variable.
+            </li>
+            <li>
+                <code class="language-ts">never</code> : utilisé pour représenter un type qui ne peut jamais se
+                produire, par exemple lorsque l'ensemble des types d'une union ont été épuisés.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Exemple d'utilisation de unknown</h3>
+        <p>
+            Le type <code class="language-ts">unknown</code> est utile lorsque vous ne savez pas quel type de valeur
+            sera assigné à une variable.
+            Par exemple, si vous recevez une valeur d'une API externe, vous pouvez utiliser <code class="language-ts">unknown</code>
+            pour indiquer que le type n'est pas connu à l'avance :
+        </p>
+        <pre><code class="language-ts">function handleResponse(response: unknown) {
+    if (typeof response === 'string') {
+        console.log('Response is a string:', response);
+    } else if (typeof response === 'number') {
+        console.log('Response is a number:', response);
+    } else {
+        console.log('Response is of unknown type');
+    }
+}</code></pre>
+        <p>
+            Dans cet exemple, TypeScript exige de vérifier le type de la variable <code class="language-ts">response</code>
+            avant de l'utiliser.
+        </p>
+    </section>
+
+    <section>
+        <h3>Exemple d'utilisation de never</h3>
+        <p>
+            Le type <code class="language-ts">never</code> est utilisé pour représenter une valeur qui ne peut jamais
+            se produire.
+            Par exemple, si vous utilisez le narrowing pour vérifier le type d'une variable et que vous
+            gérez tous les cas possibles, vous pouvez utiliser <code class="language-ts">never</code> pour indiquer
+            que le code ne devrait jamais atteindre cette partie :
+        </p>
+        <pre><code class="language-ts">function handleValue(value: number | string) {
+    if (typeof value === 'number') {
+        console.log('Value is a number:', value);
+    } else if (typeof value === 'string') {
+        console.log('Value is a string:', value);
+    } else {
+        // Ici, TypeScript sait que le type de value ne peut pas être autre chose que number ou string
+        const _exhaustiveCheck: never = value; // Erreur : Type 'string' is not assignable to type 'never'
+        throw new Error(`Unhandled case: ${_exhaustiveCheck}`);
+    }
+}</code></pre>
+        <p>
+            Dans cet exemple, TypeScript sait que le type de <code class="language-ts">value</code> ne peut pas être
+            autre chose que <code class="language-ts">number</code> ou <code class="language-ts">string</code>.
+            Si vous essayez d'assigner une valeur d'un autre type, TypeScript lèvera une erreur.
+        </p>
+    </section>
+
+    <section>
+        <h3>Exemple d'utilisation de never</h3>
+        <p>
+            Dans l'exemple précédent, le typage de la fonction <code class="language-ts">handleValue</code> était
+            explicite, mais nous verrons par la suite que le typage peut être plus abstrait :
+        </p>
+        <pre><code class="language-ts">type Animal = 'dog' | 'cat';
+function handleAnimal(animal: Animal) {
+    switch (animal) {
+        case 'dog':
+            console.log('Dog:', animal.bark());
+            break;
+        case 'cat':
+            console.log('Cat:', animal.meow());
+            break;
+        default:
+            const _exhaustiveCheck: never = animal; // Erreur : Type 'Animal' is not assignable to type 'never'
+            throw new Error(`Unhandled case: ${_exhaustiveCheck}`);
+    }
+}</code></pre>
+        <p>
+            Dans cet exemple, si vous ajoutez un nouvel animal à l'union <code class="language-ts">Animal</code>,
+            TypeScript lèvera une erreur à la ligne <code class="language-ts">const _exhaustiveCheck: never = animal;</code>
+            car l'ensemble des types de l'union n'a pas été épuisé.
+        </p>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/narrowing.html#the-never-type" class="info" target="_blank">
+                never type Documentation
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Librairies externes</h3>
+        <p>
+            Si vous utilisez des librairies externes, TypeScript peut ne pas être en mesure de déterminer le type des
+            objets ou des fonctions que vous utilisez.
+        </p>
+        <p>
+            Certaines librairies fournissent des fichiers de déclaration de type (.d.ts) qui décrivent les types des
+            objets et des fonctions.
+        </p>
+        <p>
+            Si une librairie ne fournit pas de fichiers de déclaration de type, vous pouvez généralement importer le
+            fichier de déclaration de type <code class="language-ts">@types/nom-de-la-librairie</code> depuis le
+            registre npm.
+        </p>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/type-declarations.html" class="info" target="_blank">
+                Type Declarations Documentation
+            </a>
+            <a href="https://github.com/DefinitelyTyped/DefinitelyTyped" class="info" target="_blank">
+                DefinitelyTyped GitHub Repository
+            </a>
+        </footer>
+    </section>
+
+</section>

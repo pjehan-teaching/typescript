@@ -1,0 +1,234 @@
+<section id="interfaces" class="line-numbers">
+
+    <section>
+        <h2>Interfaces</h2>
+    </section>
+
+    <section>
+        <h3>Exercice fil rouge</h3>
+        <p>
+            Pour les exercices suivants, nous allons développer une librairie qui aura pour but de faciliter les
+            interactions avec une API listant des raccourcis clavier pouvant être utilisés dans des logiciels.
+        </p>
+        <p>
+            Une documentation Swagger de l'API est disponible à l'adresse suivante :
+            <a href="https://shortcuts.api.pierre-jehan.com" target="_blank">
+                <mark>https://shortcuts.api.pierre-jehan.com</mark>
+            </a>
+        </p>
+    </section>
+
+    <section>
+        <h3>Type Aliases</h3>
+        <p>
+            TypeScript permet de créer des <mark>alias de type</mark> pour simplifier la déclaration de types complexes.
+            Cela peut être utile pour rendre le <mark>code plus lisible et plus facile à maintenir</mark>.
+        </p>
+        <p>
+            Par exemple, vous pouvez créer un alias de type pour un objet représentant une personne :
+        </p>
+        <pre><code class="language-ts">type Person = {
+    name: string;
+    age: number;
+}; // Alias de type pour un objet Person</code></pre>
+        <p>
+            Vous pouvez ensuite utiliser cet alias de type pour déclarer des variables ou des paramètres de fonction :
+        </p>
+        <pre><code class="language-ts">let person: Person = { name: 'John', age: 30 };</code></pre>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#type-aliases" class="info" target="_blank">
+                Type Aliases Documentation
+            </a>
+            <a href="https://www.typescriptlang.org/static/TypeScript%20Types-ae199d69aeecf7d4a2704a528d0fd3f9.png" class="info" target="_blank">
+                Type Aliases Cheat Sheet
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <ol>
+                <li>
+                    Créez un alias de type <code class="language-ts">ResourceType</code> afin de lister l'ensemble
+                    des types de ressources disponibles dans l'API en utilisant le type <code class="language-ts">string</code>
+                    et le union type.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h3>Intersection</h3>
+        <p>
+            TypeScript permet de créer des types d'intersection en combinant plusieurs types en un seul.
+            Cela permet de créer des types plus complexes en combinant plusieurs types simples.
+        </p>
+        <pre><code class="language-ts">type Point = {
+    x: number;
+    y: number;
+};
+type Drawable = {
+    draw: () => void;
+}
+type DrawablePoint = Point & Drawable; // Type d'intersection entre Point et Drawable</code></pre>
+    </section>
+
+    <section>
+        <h3>Interfaces</h3>
+        <p>
+            TypeScript permet également de définir des interfaces pour décrire la structure d'un objet.
+            Les interfaces sont <mark>similaires aux alias de type</mark>, mais elles peuvent être étendues et
+            implémentées par des classes.
+        </p>
+        <p>
+            Par exemple, vous pouvez définir une interface pour un objet représentant une personne :
+        </p>
+        <pre><code class="language-ts">interface Person {
+    name: string;
+    age: number;
+} // Interface pour un objet Person</code></pre>
+        <p>
+            Vous pouvez ensuite utiliser cette interface pour déclarer des variables ou des paramètres de fonction :
+        </p>
+        <pre><code class="language-ts">let person: Person = { name: 'John', age: 30 };</code></pre>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/everyday-types.html#interfaces" class="info" target="_blank">
+                Interfaces Documentation
+            </a>
+            <a href="https://www.typescriptlang.org/static/TypeScript%20Interfaces-34f1ad12132fb463bd1dfe5b85c5b2e6.png" class="info" target="_blank">
+                Interfaces Cheat Sheet
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <ol>
+                <li>
+                    Créez une interface <code class="language-ts">Category</code> afin de pouvoir typer une catégorie
+                    retournée par l'API.
+                </li>
+                <li>
+                    Utilisez le type <code class="language-ts">ResourceType</code> créé précédemment pour typer la
+                    propriété <code class="language-ts">@type</code> de l'interface.
+                </li>
+                <li>
+                    Créez une fonction <code class="language-ts">getCategories</code> retournant la liste des
+                    catégories disponibles dans l'API.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h3>Étendre une interface</h3>
+        <p>
+            Vous pouvez étendre une interface pour créer une nouvelle interface qui hérite des propriétés de l'interface
+            d'origine.
+            Cela permet de créer des types plus complexes en combinant plusieurs interfaces.
+        </p>
+        <p>
+            Par exemple, vous pouvez créer une interface <code class="language-ts">Employee</code> qui étend l'interface
+            <code class="language-ts">Person</code> :
+        </p>
+        <pre><code class="language-ts">interface Employee extends Person {
+    employeeId: number;
+    department: string;
+} // Interface Employee qui étend l'interface Person</code></pre>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <ol>
+                <li>
+                    Créez une interface <code class="language-ts">Resource</code> contenant la liste des propriétés
+                    communes à l'ensemble des ressources de l'API.
+                </li>
+                <li>
+                    Utilisez l'interface <code class="language-ts">Resource</code> pour étendre l'interface
+                    <code class="language-ts">Category</code> créée précédemment.
+                </li>
+                <li>
+                    Créez des interfaces pour l'ensemble des types de ressources disponibles dans l'API.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h3>Propriétés optionnelles</h3>
+        <p>
+            TypeScript permet de déclarer des propriétés optionnelles dans une interface en utilisant le caractère
+            <code class="language-ts">?</code>.
+            Cela signifie que la propriété peut être présente ou absente dans l'objet.
+        </p>
+        <p>
+            Par exemple, vous pouvez déclarer une propriété optionnelle <code class="language-ts">address</code> dans
+            l'interface <code class="language-ts">Person</code> :
+        </p>
+        <pre><code class="language-ts">interface Person {
+    name: string;
+    age: number;
+    address?: string; // Propriété optionnelle
+} // Interface Person avec une propriété optionnelle</code></pre>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/objects.html" class="info" target="_blank">
+                Propriétés optionnelles Documentation
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Extra properties</h3>
+        <p>
+            TypeScript permet de déclarer des propriétés supplémentaires dans une interface en utilisant le caractère
+            <code class="language-ts">[key: string]: any</code>.
+            Cela signifie que l'objet peut avoir des propriétés supplémentaires qui ne sont pas spécifiées dans
+            l'interface.
+        </p>
+        <p>
+            Par exemple, vous pouvez déclarer une propriété supplémentaire <code class="language-ts">extra</code> dans
+            l'interface <code class="language-ts">Person</code> :
+        </p>
+        <pre><code class="language-ts">interface Person {
+    name: string;
+    age: number;
+    [key: string]: any; // Propriété supplémentaire
+} // Interface Person avec une propriété supplémentaire</code></pre>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/objects.html#excess-property-checks" class="info" target="_blank">
+                Propriétés supplémentaires Documentation
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Interface vs Type Alias</h3>
+        <p>
+            Les interfaces et les alias de type sont similaires, mais il existe quelques différences clés :
+        </p>
+        <ul>
+            <li>
+                Les interfaces peuvent être <mark>étendues et implémentées par des classes</mark>, tandis que les alias
+                de type ne le peuvent pas.
+            </li>
+            <li>
+                Les interfaces peuvent être <mark>fusionnées</mark>, tandis que les alias de type ne le peuvent pas.
+            </li>
+            <li>
+                Les alias de type peuvent représenter des <mark>types primitifs</mark>, des tableaux et d'autres types
+                complexes, tandis que les interfaces ne peuvent représenter <mark>que des objets</mark>.
+            </li>
+        </ul>
+        <blockquote>
+            <p>
+                If you would like a heuristic, use interface until you need to use features from type.
+            </p>
+            <cite>TypeScript Handbook</cite>
+        </blockquote>
+    </section>
+
+</section>

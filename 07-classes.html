@@ -1,0 +1,313 @@
+<section id="classes" class="line-numbers">
+
+    <section>
+        <h2>Classes</h2>
+    </section>
+
+    <section>
+        <p>
+            Le langage JavaScript est un langage orienté objet basé sur des prototypes. Cependant, la <mark>syntaxe</mark>
+            de la POO en JavaScript est <mark>différente</mark> de celle des langages orientés objet classiques tels que
+            Java ou C# et certaines fonctionalités de la POO sont <mark>absentes</mark> de JavaScript.
+        </p>
+        <p>
+            TypeScript introduit une <mark>syntaxe de classe</mark> qui est plus proche de celle des langages orientés
+            objet classiques. Cela permet aux développeurs de TypeScript d'utiliser la POO de manière plus familière et
+            intuitive.
+        </p>
+        <footer>
+            <a href="https://www.typescriptlang.org/static/TypeScript%20Classes-83cc6f8e42ba2002d5e2c04221fa78f9.png" class="info" target="_blank">
+                Classes Cheat Sheet
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Qu'est-ce qu'une classe ?</h3>
+        <p>
+            Une <mark>classe</mark> est un modèle pour créer des objets. Elle définit les propriétés et les méthodes que
+            les objets créés à partir de cette classe auront.
+        </p>
+        <p>
+            En TypeScript, une classe est définie à l'aide du mot clé <code class="language-ts">class</code>, suivi du
+            nom de la classe et d'un bloc de code entre accolades.
+        </p>
+        <pre><code class="language-ts">class Person {
+    name: string;
+    age: number;
+    constructor(name: string, age: number) {
+        this.name = name;
+        this.age = age;
+    }
+    greet() {
+        console.log(`Hello, my name is ${this.name} and I am ${this.age} years old.`);
+    }
+}</code></pre>
+        <p>
+            Dans cet exemple, la classe <code class="language-ts">Person</code> a deux propriétés : <code
+                class="language-ts">name</code> et <code class="language-ts">age</code>, ainsi qu'une méthode <code
+                class="language-ts">greet</code> qui affiche un message de salutation.
+        </p>
+    </section>
+
+    <section>
+        <h3>Visibilité des membres</h3>
+        <p>
+            En TypeScript, vous pouvez contrôler la visibilité des membres d'une classe à l'aide des modificateurs
+            d'accès : <code class="language-ts">public</code>, <code class="language-ts">private</code> et
+            <code class="language-ts">protected</code>.
+        </p>
+        <ul>
+            <li>
+                <code class="language-ts">public</code> : Le membre est accessible depuis n'importe où (par défaut).
+            </li>
+            <li>
+                <code class="language-ts">protected</code> : Le membre est accessible à l'intérieur de la classe et
+                dans les classes dérivées.
+            </li>
+            <li>
+                <code class="language-ts">private</code> : Le membre est accessible uniquement à l'intérieur de la
+                classe.
+            </li>
+        </ul>
+    </section>
+
+    <section>
+        <h3>Encapsulation</h3>
+        <p>
+            L'<mark>encapsulation</mark> est un principe de la POO qui consiste à restreindre l'accès direct aux
+            propriétés et méthodes d'un objet. En TypeScript, vous pouvez utiliser les modificateurs d'accès pour
+            encapsuler les membres d'une classe.
+        </p>
+        <p>
+            Par exemple, vous pouvez déclarer une propriété comme <code class="language-ts">private</code> pour
+            empêcher son accès direct depuis l'extérieur de la classe :
+        </p>
+        <pre><code class="language-ts">class Person {
+    private _name: string;
+    private _age: number;
+    constructor(name: string, age: number) {
+        this._name = name;
+        this._age = age;
+    }
+    public greet() {
+        console.log(`Hello, my name is ${this._name} and I am ${this._age} years old.`);
+    }
+    set name(name: string) {
+        this._name = name;
+    }
+    get name() {
+        console.log(`Getting name: ${this._name}`);
+        return this._name;
+    }
+}</code></pre>
+    </section>
+
+    <section>
+        <h3>Encapsulation</h3>
+        <p>
+            Contrairement aux langages orientés objet classiques, il est souvent préférable en JavaScript de
+            définir les propriétés d'une classe comme <code class="language-ts">public</code> si il n'y a pas de
+            logique particulière à appliquer lors de la lecture ou de l'écriture de la propriété.
+        </p>
+        <p>
+            Il sera possible par la suite de <mark>modifier la logique d'accès</mark> à la propriété
+            <mark>sans avoir à modifier le code existant</mark>.
+        </p>
+    </section>
+
+    <section class="fullwidth">
+        <h3>Héritage</h3>
+        <p>
+            Comme en JavaScript, TypeScript prend en charge l'<mark>héritage</mark> d'une manière similaire à d'autres
+            langages orientés objet. Vous pouvez créer une classe dérivée qui hérite des propriétés et des méthodes d'une
+            classe de base en utilisant le mot clé <code class="language-ts">extends</code>.
+        </p>
+        <div class="container">
+            <div class="col">
+                <pre><code class="language-ts">class Animal {
+    // Parameter properties
+    constructor(public name: string) {}
+    speak() {
+        console.log(`${this.name} makes a noise.`);
+    }
+}</code></pre>
+            </div>
+            <div class="col">
+                <pre><code class="language-ts">class Dog extends Animal {
+    speak() { // Redéfinition (override) de la méthode speak
+        console.log(`${this.name} barks.`);
+    }
+}</code></pre>
+            </div>
+        </div>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#extends-clauses" class="info" target="_blank">
+                Héritage
+            </a>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#parameter-properties" class="info" target="_blank">
+                Parameter properties
+            </a>
+        </footer>
+    </section>
+
+    <section class="fullwidth">
+        <h3>Abstraction</h3>
+        <p>
+            La création de classes abstraites en TypeScript est <mark>identique à celle utilisée dans d'autres langages
+            orientés objet</mark> tel que Java ou C#. Une classe abstraite est une classe qui ne <mark>peut pas être
+            instanciée</mark> directement, mais qui <mark>peut être étendue</mark> par d'autres classes.
+            Elle peut contenir des <mark>méthodes abstraites</mark> (sans implémentation) et des méthodes concrètes
+            (avec implémentation).
+        </p>
+        <div class="container">
+            <div class="col">
+                <pre><code class="language-ts">abstract class Shape {
+    abstract area(): number;
+    abstract perimeter(): number;
+    describe(): void {
+        console.log('Shape area: ' + this.area()');
+        console.log('Shape perimeter: ' + this.perimeter());
+    }
+}</code></pre>
+            </div>
+            <div class="col">
+                <pre><code class="language-ts">class Circle extends Shape {
+    constructor(private radius: number) {
+        super();
+    }
+    area(): number {
+        return Math.PI * this.radius * this.radius;
+    }
+    perimeter(): number {
+        return 2 * Math.PI * this.radius;
+    }
+    describe(): void {
+        console.log(`Circle with radius ${this.radius}.`);
+        super.describe();
+    }
+}</code></pre>
+            </div>
+        </div>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#abstract-classes-and-members" class="info" target="_blank">
+                Classes abstraites
+            </a>
+        </footer>
+    </section>
+
+    <section class="fullwidth">
+        <h3>Interfaces</h3>
+        <p>
+            De nouveau, TypeScript utilise une <mark>syntaxe d'interface</mark> proche de celle des langages orientés
+            objet classiques. Ainsi, vous pouvez définir une interface à l'aide du mot clé
+            <code class="language-ts">interface</code> comme nous l'avons vu dans les slides précédentes.
+        </p>
+        <p>
+            Une classe pourra <mark>implémenter une ou plusieurs interfaces</mark> à l'aide du mot clé
+            <code class="language-ts">implements</code>.
+        </p>
+        <p>
+            Cependant, contrairement à d'autres langages orientés objet, il sera possible de
+            <mark>définir des propriétés</mark> et pas uniquement des méthodes dans une interface :
+        </p>
+        <div class="container">
+            <div class="col">
+                <pre><code class="language-ts">interface Sizeable {
+    width: number;
+    height: number;
+    resize(width: number, height: number): void;
+}</code></pre>
+            </div>
+            <div class="col">
+                <pre><code class="language-ts">class Rectangle implements Sizeable {
+    constructor(public width: number, public height: number) {}
+    resize(width: number, height: number): void {
+        this.width = width;
+        this.height = height;
+    }
+}</code></pre>
+            </div>
+        </div>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#implements-clauses" class="info" target="_blank">
+                Interfaces
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Propriétés et méthodes statiques</h3>
+        <p>
+            En TypeScript, vous pouvez définir des propriétés et des méthodes statiques dans une classe à l'aide du mot
+            clé <code class="language-ts">static</code>. Les membres statiques sont <mark>associés à la classe</mark>
+            elle-même plutôt qu'à une instance de la classe.
+        </p>
+        <pre><code class="language-ts">class Shape {
+    static numberOfShapes: number = 0;
+    constructor() {
+        Shape.numberOfShapes++;
+    }
+    static getNumberOfShapes(): number {
+        return Shape.numberOfShapes;
+    }
+    static resetNumberOfShapes(): void {
+        Shape.numberOfShapes = 0;
+    }
+}</code></pre>
+        <p>
+            Contrairement au C#, il n'est
+            <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#why-no-static-classes" target="_blank">
+                pas possible de définir des classes statiques
+            </a>
+            en TypeScript.
+        </p>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#static-members" class="info" target="_blank">
+                Static members
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Generics</h3>
+        <p>
+            Tout comme les fonctions, les classes peuvent également être définies avec des <mark>paramètres de type</mark>
+            (Generics). Cela permet de créer des classes qui peuvent travailler avec différents types de données sans
+            avoir à spécifier le type exact à l'avance.
+        </p>
+        <p>
+            Par exemple, vous pouvez créer une classe <code class="language-ts">Box</code> qui peut contenir un élément
+            de n'importe quel type :
+        </p>
+        <pre><code class="language-ts">class Box&lt;T&gt; {
+    constructor(private _value: T) {}
+    get value(): T {
+        return this._value;
+    }
+    set value(value: T) {
+        this._value = value;
+    }
+}</code></pre>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/2/classes.html#generic-classes" class="info" target="_blank">
+                Generics
+            </a>
+        </footer>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <ol>
+                <li>
+                    Créez des classes pour chaque type de ressource de l'API.
+                </li>
+                <li>
+                    Créez des fonctions pour charger les données de l'API et les convertir en instances de ces classes.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+</section>

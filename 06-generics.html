@@ -1,0 +1,127 @@
+<section id="generics" class="line-numbers">
+
+    <section>
+        <h2>Generics</h2>
+    </section>
+
+    <section>
+        <h3>Qu'est-ce que les Generics ?</h3>
+        <p>
+            Les <mark>Generics</mark> sont une fonctionnalité de TypeScript qui permet de créer des fonctions, des classes
+            et des interfaces qui peuvent travailler avec <mark>différents types de données</mark> sans avoir à spécifier
+            le type exact à l'avance.
+        </p>
+        <p>
+            Cela permet d'écrire du code plus <mark>flexible et réutilisable</mark>, tout en conservant la sécurité de type.
+        </p>
+    </section>
+
+    <section>
+        <h3>Qu'est-ce que les Generics ?</h3>
+        <p>
+            Par exemple, vous pouvez créer une fonction qui accepte un tableau de n'importe quel type et retourne le
+            premier élément du tableau :
+        </p>
+        <pre><code class="language-ts">function getFirstElement&lt;T&gt;(arr: T[]): T {
+    return arr[0];
+}</code></pre>
+        <p>
+            Dans cet exemple, le type <code class="language-ts">T</code> est un paramètre de type qui sera remplacé par
+            le type réel lorsque la fonction sera appelée.
+        </p>
+        <p>
+            Vous pouvez ensuite appeler cette fonction avec différents types de tableaux :
+        </p>
+        <pre><code class="language-ts">const numbers = [1, 2, 3];
+const firstNumber = getFirstElement(numbers); // firstNumber est de type number
+const strings = ['a', 'b', 'c'];
+const firstString = getFirstElement(strings); // firstString est de type string</code></pre>
+        <p>
+            Dans cet exemple, TypeScript déduit automatiquement le type de <code class="language-ts">T</code> en
+            fonction du tableau passé en argument.
+        </p>
+    </section>
+
+    <section>
+        <h3>Generics et interfaces</h3>
+        <p>
+            Vous pouvez également utiliser des <mark>Generics</mark> avec des interfaces pour créer des types
+            réutilisables.
+        </p>
+        <p>
+            Par exemple, vous pouvez créer une interface <code class="language-ts">Pair</code> qui représente une paire
+            de valeurs de n'importe quel type :
+        </p>
+        <pre><code class="language-ts">interface Pair&lt;T, U&gt; {
+    first: T;
+    second: U;
+}</code></pre>
+        <p>
+            Vous pouvez ensuite utiliser cette interface pour créer des paires de différents types :
+        </p>
+        <pre><code class="language-ts">const numberStringPair: Pair&lt;number, string&gt; = { first: 1, second: 'one' };
+const stringBooleanPair: Pair&lt;string, boolean&gt; = { first: 'true', second: true };</code></pre>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <ol>
+                <li>
+                    Créez une interface <code class="language-ts">Collection</code> afin de pouvoir typer une
+                    collection retournée par l'API.
+                </li>
+                <li>
+                    Utilisez les Generics pour que le type des éléments contenus dans la collection soit automatiquement
+                    inféré en fonction du type de la collection.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h3>Exercice</h3>
+        <div class="instructions">
+            <ol>
+                <li>
+                    Créez une fonction <code class="language-ts">getCollection</code> afin de remplacer la fonction
+                    <code class="language-ts">getCategories</code> créée précédemment.
+                </li>
+                <li>
+                    Utilisez les Generics pour que le type de la collection soit automatiquement inféré en fonction du type
+                    de ressource passée en argument.
+                </li>
+            </ol>
+        </div>
+    </section>
+
+    <section>
+        <h3>Exemple avancé</h3>
+        <p>
+            Afin d'être compatible avec l'API DOM, TypeScript utilise des <mark>définitions</mark> pour décrire les
+            types des objets du DOM.
+        </p>
+        <p>
+            Par exemple, la méthode <code class="language-ts">document.querySelector</code> est typée comme suit :
+        </p>
+        <pre><code class="language-ts">querySelector&lt;K extends keyof HTMLElementTagNameMap&gt;(selectors: K): HTMLElementTagNameMap[K] | null;
+querySelector&lt;K extends keyof SVGElementTagNameMap&gt;(selectors: K): SVGElementTagNameMap[K] | null;
+querySelector&lt;E extends Element = Element&gt;(selectors: string): E | null;</code></pre>
+        <p>
+            La documentation contient également un autre éxemple utilisant des generics avec la méthode
+            <code class="language-ts">document.createElement</code> :
+        </p>
+        <pre><code class="language-ts">createElement&lt;K extends keyof HTMLElementTagNameMap&gt;(tagName: K, options?: ElementCreationOptions): HTMLElementTagNameMap[K];</code></pre>
+        <p>
+            Ici, le mot clé <code class="language-ts">extends</code> indique que le type <code class="language-ts">K</code>
+            doit être une clé de l'interface <code class="language-ts">HTMLElementTagNameMap</code>, qui est un
+            mappage des noms de balises HTML aux types d'éléments correspondants.
+        </p>
+        <footer>
+            <a href="https://www.typescriptlang.org/docs/handbook/dom-manipulation.html#documentcreateelement" class="info" target="_blank">
+                Documentation createElement
+            </a>
+        </footer>
+    </section>
+
+</section>

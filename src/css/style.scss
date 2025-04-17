@@ -1,0 +1,42 @@
+@import "blockquote";
+
+.reveal {
+
+    pre[class*="language-"] {
+        width: 100%;
+        box-sizing: border-box;
+        font-size: 0.6em;
+        &:not(.line-numbers) {
+            padding: 0.5em;
+        }
+        code {
+            padding: 0;
+        }
+        .line-highlight {
+            margin-top: 10px;
+        }
+        &.line-numbers {
+            .line-highlight {
+                margin-top: 15px;
+            }
+        }
+    }
+
+    .slides {
+        & > section {
+            & > section {
+                width: 60%;
+                left: 20%;
+                &.fullwidth {
+                    width: 90%;
+                    left: 5%;
+                }
+            }
+        }
+    }
+
+    mark {
+        background: linear-gradient(180deg,rgba(255,255,255,0) 60%, rgba(49, 120, 198, 0.5) 40%);
+    }
+
+}
